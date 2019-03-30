@@ -42,6 +42,9 @@ SD card root
 
 `DCIM` and `SYSTEM` were put there by the camera.  `httpd` and `telnetd` were the copies of BusyBox.  Everything else is the contents of the `SD-card-root` folder from this repository.
 
+Place a link from /sdcard/DCIM/101PHOTO /sdcard/www/imgs to make the images accessable for httpd (Apache Web Server).
+For this telnet to the camera with `telnet 192.168.43.1`. The user is `root`, no password. On the cameras shell run `ln -s /sdcard/DCIM/101PHOTO /sdcard/www/imgs`.
+
 Put your SD card back in your Gear 360 camera (2017).
 
 ## Wifi remote shutter, and intervalometer
@@ -50,7 +53,7 @@ Turn your camera on.  Hold "Menu" until it prompts you with one of the "Connect 
 
 Connect to the camera's wifi access point using your phone or computer.  Once you're connected, make sure your camera is set to photo mode.
 
-Using your web browser, visit `http://CAMERA:55360/`, where `CAMERA` is the IP address of your camera.  Mine is `192.168.43.1`.  I don't know what yours is.  I don't know how to help you figure it out from a phone, but once you do figure it out, it's probably always the same.  In your web browser, you'll see a screen like the screenshot above.
+Using your web browser, visit `http://192.168.43.1:55360/`. The camera is your gateway so it's IP won't change. In your web browser, you'll see a screen like the screenshot above.
 
 When you press "Press shutter button", the camera will act like you pressed the shutter button in the front.  (If you accidentally left it on video mode, it'll start recording a video.)
 
