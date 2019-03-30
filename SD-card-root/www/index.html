@@ -1,32 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=320, initial-scale=1">
-<title>Gear 360 (2017)</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=320, initial-scale=1">
+    <style>
+        img {
+            max-width: 100%;
+        }
+    </style>
 </head>
-
 <body>
+    <h1>Remote shutter</h1>
+    <form action="/cgi-bin/shutter-button" method="post">
+        <button>Press shutter button</button>
+    </form>
+    <hr>
+    <h1>Time-lapse photos</h1>
+    <form action="/cgi-bin/start-30s-timelapse" method="post">
+        <button>Start 30s time-lapse</button>
+    </form>
+    <br>
+    <form action="/cgi-bin/kill-30s-timelapse" method="post">
+        <button>Stop 30s time-lapse</button>
+    </form>
+    <label for="num-imgs">Show last <input type="number" id="num-imgs" min="1" value="5" on> images</label>
+    <div id="list"></div>
+    <script>
+        function loadImgs() {
+            let xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("list").innerHTML = '';
 
-<h1>Remote shutter</h1>
+                    let imgs = this.responseText.split("\n").reverse().filter(e => e != '');
+                    imgs.forEach(function (src) {
 
-<form action="/cgi-bin/shutter-button" method="post">
-<button>Press shutter button</button>
-</form>
+                        if (imgs.indexOf(src) < document.getElementById('num-imgs').value) {
+                            let imgTag = document.createElement('img');
+                            imgTag.src = 'imgs/' + src;
+                            document.getElementById("list").append(imgTag);
+                        }
+                    });
+                }
+            };
+            xhttp.open("GET", "/cgi-bin/get_img_list", true);
+            xhttp.send();
+        }
+        document.getElementById("num-imgs").addEventListener("change", loadImgs);
+        loadImgs();
+    </script>
 
-<hr>
-
-<h1>Time-lapse photos</h1>
-
-<form action="/cgi-bin/start-30s-timelapse" method="post">
-<button>Start 30s time-lapse</button>
-</form>
-
-<br>
-
-<form action="/cgi-bin/kill-30s-timelapse" method="post">
-<button>Stop 30s time-lapse</button>
-</form>
-
+    </script>
 </body>
+
 </html>
