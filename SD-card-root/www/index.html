@@ -8,6 +8,12 @@
         img {
             max-width: 100%;
         }
+
+        .refresh {
+            /* https://stackoverflow.com/a/54006960/4062341 */
+            display: inline-block;
+            transform: rotate(90deg);
+        }
     </style>
 </head>
 
@@ -55,7 +61,12 @@
             <button>Stop 30s time-lapse</button>
         </form>
     </fieldset>
-    <label for="num-imgs">Show last <input type="number" id="num-imgs" min="1" value="5" on> images</label>
+    <hr>
+    <fieldset>
+        <legend>Images</legend>
+        <label for="num-imgs">Show last <input type="number" id="num-imgs" min="1" value="5" on> images</label>
+        <button id="btn-refresh"><span class="refresh">↻</span></button>
+    </fieldset>
     <div id="list"></div>
 
 

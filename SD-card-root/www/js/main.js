@@ -39,6 +39,8 @@ function init() {
     loadImgs();
     document.getElementById("iso_dropdown").addEventListener("change", setISO);
     setISO();
+
+    document.getElementById("btn-refresh").addEventListener('click', loadImgs);
 }
 
 init();
