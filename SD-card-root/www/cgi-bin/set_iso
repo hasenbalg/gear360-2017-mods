@@ -1,0 +1,12 @@
+#!/bin/sh
+POST=$(</dev/stdin)
+echo "Content-type: text/plain"
+echo ""
+
+
+if [ -n "$POST" ]
+then
+  st cap capdtm setusr 64 $POST
+
+fi
+st cap capdtm getusr 64

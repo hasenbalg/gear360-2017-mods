@@ -10,48 +10,56 @@
         }
     </style>
 </head>
+
 <body>
-    <h1>Remote shutter</h1>
-    <form action="/cgi-bin/shutter-button" method="post">
-        <button>Press shutter button</button>
-    </form>
+    <fieldset>
+        <legend>Remote shutter</legend>
+        <form action="/cgi-bin/shutter-button" method="post">
+            <button>Press shutter button</button>
+        </form>
+    </fieldset>
     <hr>
-    <h1>Time-lapse photos</h1>
-    <form action="/cgi-bin/start-30s-timelapse" method="post">
-        <button>Start 30s time-lapse</button>
-    </form>
-    <br>
-    <form action="/cgi-bin/kill-30s-timelapse" method="post">
-        <button>Stop 30s time-lapse</button>
-    </form>
+    <fieldset>
+        <legend>Max Auto ISO</legend>
+        <select name="iso" id="iso_dropdown">
+            <option value="0x400000">125</option>
+            <option value="0x400001">160</option>
+            <option value="0x400002">200</option>
+            <option value="0x400003">250</option>
+            <option value="0x400004">320</option>
+            <option value="0x400005">400</option>
+            <option value="0x400006">500</option>
+            <option value="0x400007">640</option>
+            <option value="0x400008">800</option>
+            <option value="0x400009">1000</option>
+            <option value="0x40000a">1250</option>
+            <option value="0x40000b">1600</option>
+            <option value="0x40000c">2000</option>
+            <option value="0x40000d">2500</option>
+            <option value="0x40000e">3200</option>
+            <option value="0x40000f">4000</option>
+            <option value="0x400010">5000</option>
+            <option value="0x400011">6400</option>
+            <option value="0x400012">12800</option>
+            <option value="0x400013">25600</option>
+        </select>
+    </fieldset>
+    <hr>
+    <fieldset>
+        <legend>Time-lapse photos</legend>
+        <form action="/cgi-bin/start-30s-timelapse" method="post">
+            <button>Start 30s time-lapse</button>
+        </form>
+        <br>
+        <form action="/cgi-bin/kill-30s-timelapse" method="post">
+            <button>Stop 30s time-lapse</button>
+        </form>
+    </fieldset>
     <label for="num-imgs">Show last <input type="number" id="num-imgs" min="1" value="5" on> images</label>
     <div id="list"></div>
-    <script>
-        function loadImgs() {
-            let xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById("list").innerHTML = '';
 
-                    let imgs = this.responseText.split("\n").reverse().filter(e => e != '');
-                    imgs.forEach(function (src) {
 
-                        if (imgs.indexOf(src) < document.getElementById('num-imgs').value) {
-                            let imgTag = document.createElement('img');
-                            imgTag.src = 'imgs/' + src;
-                            document.getElementById("list").append(imgTag);
-                        }
-                    });
-                }
-            };
-            xhttp.open("GET", "/cgi-bin/get_img_list", true);
-            xhttp.send();
-        }
-        document.getElementById("num-imgs").addEventListener("change", loadImgs);
-        loadImgs();
-    </script>
-
-    </script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
