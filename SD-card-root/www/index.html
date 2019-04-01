@@ -8,21 +8,14 @@
         img {
             max-width: 100%;
         }
-
-        .refresh {
-            /* https://stackoverflow.com/a/54006960/4062341 */
-            display: inline-block;
-            transform: rotate(90deg);
-        }
     </style>
 </head>
 
 <body>
     <fieldset>
         <legend>Remote shutter</legend>
-        <form action="/cgi-bin/shutter-button" method="post">
-            <button>Press shutter button</button>
-        </form>
+        <button id="btn-shutter">Take a Picture</button>
+        <label for="timer-time">Wait for <input type="number" id="timer-time" value="0"> Seconds</label>
     </fieldset>
     <hr>
     <fieldset>
@@ -65,7 +58,7 @@
     <fieldset>
         <legend>Images</legend>
         <label for="num-imgs">Show last <input type="number" id="num-imgs" min="1" value="5" on> images</label>
-        <button id="btn-refresh"><span class="refresh">↻</span></button>
+        <button id="btn-refresh">Refresh</button>
     </fieldset>
     <div id="list"></div>
 
