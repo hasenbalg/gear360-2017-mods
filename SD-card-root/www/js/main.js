@@ -73,6 +73,36 @@ function setShutterMode() {
     xhttp.send(document.getElementById("shutter-mode").value);
 }
 
+function killTimeLapse() {
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/cgi-bin/kill-30s-timelapse", true);
+    xhttp.send();
+}
+
+function startTimeLapse() {
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/cgi-bin/start-30s-timelapse", true);
+    xhttp.send();
+}
+
+function switchTimeLapse() {
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            if (this.responseText.includes('30s-timelapse')) {
+                //timelapse is running so kill it
+                killTimeLapse();
+                document.getElementById('time-lapse').innerText = 'Start 30s Time-Lapse';
+            } else {
+                startTimeLapse();
+                document.getElementById('time-lapse').innerText = 'End 30s Time-Lapse';
+            }
+        }
+    };
+    xhttp.open("POST", "/cgi-bin/check_processes", true);
+    xhttp.send();
+}
+
 function init() {
     document.getElementById("num-imgs").addEventListener("change", loadImgs);
     loadImgs();
@@ -83,6 +113,10 @@ function init() {
 
     document.getElementById("btn-shutter").addEventListener('click', takePicture);
     document.getElementById("btn-refresh").addEventListener('click', loadImgs);
+    
+    document.getElementById("time-lapse").addEventListener('click', switchTimeLapse);
+
+
 }
 
 init();
