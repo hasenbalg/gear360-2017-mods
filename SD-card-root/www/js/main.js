@@ -29,6 +29,8 @@ function takePicture() {
             setTimeout(function () {
                 document.getElementById("btn-shutter").innerHTML = 'Take a Picture';
                 document.getElementById("btn-shutter").disabled = false;
+                loadImgs();
+
             }, 12000);
 
         }
@@ -56,11 +58,28 @@ function setISO() {
     xhttp.send(document.getElementById("iso_dropdown").value);
 }
 
+function setShutterMode() {
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText.split(' '));
+            let reponse = this.responseText.split(' ');
+            console.log(reponse[reponse.length - 1].replace('(', '').replace(')', '').trim());
+
+            document.getElementById('shutter-mode').value = reponse[reponse.length - 1].replace('(', '').replace(')', '').trim();
+        }
+    };
+    xhttp.open("POST", "/cgi-bin/set_shutter_mode", true);
+    xhttp.send(document.getElementById("shutter-mode").value);
+}
+
 function init() {
     document.getElementById("num-imgs").addEventListener("change", loadImgs);
     loadImgs();
     document.getElementById("iso_dropdown").addEventListener("change", setISO);
     setISO();
+    // document.getElementById('shutter-mode').addEventListener('change', setShutterMode)
+    // setShutterMode();
 
     document.getElementById("btn-shutter").addEventListener('click', takePicture);
     document.getElementById("btn-refresh").addEventListener('click', loadImgs);
