@@ -5,8 +5,37 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=320, initial-scale=1">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: black;
+            color: white;
+            margin: .5rem;
+            font-family: sans;
+        }
+
         img {
             max-width: 100%;
+        }
+
+        fieldset {
+            display: inline-block;
+            padding: .5rem;
+        }
+
+        legend{
+            padding: .5rem;
+        }
+
+        input,
+        button,
+        select {
+            padding: 1rem;
+            background: #242424;
+            color: white;
         }
     </style>
 </head>
@@ -15,9 +44,10 @@
     <fieldset>
         <legend>Remote shutter</legend>
         <button id="btn-shutter">Take a Picture</button>
+        
         <label for="timer-time">Wait for <input type="number" id="timer-time" value="0"> Seconds</label>
     </fieldset>
-    <hr>
+
     <fieldset>
         <legend>Max Auto ISO</legend>
         <select name="iso" id="iso_dropdown">
@@ -43,18 +73,30 @@
             <option value="0x400013">25600</option>
         </select>
     </fieldset>
-    <hr>
-    <fieldset>
+
+
+    <fieldset  style="display:none;">
+        <legend>Shutter Mode</legend>
+        <select id="shutter-mode">
+            <option value="0x5b0000">SHUTTERMIN_OFF</option>
+            <option value="0x5b0001">SHUTTERMIN_AUTO_0</option>
+            <option value="0x5b0002">SHUTTERMIN_AUTO_FAST1</option>
+            <option value="0x5b0003">SHUTTERMIN_AUTO_FAST2</option>
+            <option value="0x5b0004">SHUTTERMIN_AUTO_SLOW1</option>
+            <option value="0x5b0005">SHUTTERMIN_AUTO_SLOW2</option>
+            <option value="0x5b0006">SHUTTERMIN_MANUAL</option>
+        </select>
+    </fieldset>
+
+    <fieldset style="display:none;">
         <legend>Time-lapse photos</legend>
         <form action="/cgi-bin/start-30s-timelapse" method="post">
             <button>Start 30s time-lapse</button>
         </form>
-        <br>
         <form action="/cgi-bin/kill-30s-timelapse" method="post">
             <button>Stop 30s time-lapse</button>
         </form>
     </fieldset>
-    <hr>
     <fieldset>
         <legend>Images</legend>
         <label for="num-imgs">Show last <input type="number" id="num-imgs" min="1" value="5" on> images</label>
