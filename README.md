@@ -77,6 +77,9 @@ Taking a photo using the "Press shutter button" while connected to the camera's 
 
 Starting the intervalometer using the "Start 30s time-lapse" button will wait 30 seconds, and then take a photo, and stitch it together, but you cannot disconnect from the "OSC" wifi.  If you disconnect from wifi, it will leave Street View mode and go back to taking regular photos (or videos, or whatever you last used).  You must have an active connection to the camera's "OSC" wifi the entire time the time-lapse is running if you want all your photos pre-stitched.
 
+## Android Phone won't connect
+I had to disable mobil data on my phone beacuse it tryed to resolve the cameras ip with the cell modem. When the cameras wifi is the only network connection it works fine.
+
 ## Credits
 
 Based on @ottokiksmaler's information:
