@@ -4,6 +4,10 @@ Modding a Samsung Gear 360 camera (2017) to support wifi remote shutter and time
 
 <img src="https://github.com/hasenbalg/gear360-2017-mods/blob/master/Screenshotfrom2019-04-0115-28-55.png" width=312>
 
+This makes the Samsung Gear 360 camera (2017) model usable with all kinds of devices with a web browser.
+It uses Street View Mode of the camera to let the camera itself stitch the images right after shooting rather than an external app on a phone or a cloud service.  
+
+
 See <http://vitor.io/gear-360-remote-interval-timelapse> for background information.  Instructions are below.
 
 ## Setup
